@@ -1,0 +1,23 @@
+name: Prueba y despliegue
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  prueba-y-despliegue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+      - name: Ejecutar pruebas
+        run: npm test
+
+      - name: Crear imagen de Docker
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: kronn0514/lab3-github-actions:0.0.1
